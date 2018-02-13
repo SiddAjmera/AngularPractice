@@ -1,0 +1,151 @@
+<div class="container">
+  <h3>Reactive New User Form</h3>
+  <form [formGroup]="userForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input 
+        formControlName="name"
+        type="text" 
+        class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input 
+        formControlName="username"
+        type="text" 
+        class="form-control">
+      <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
+        <p *ngIf="username.errors.asyncUnique">This came from async unique</p>
+        <!-- <p *ngIf="username.errors.unique">This came from unique</p> -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input 
+        formControlName="email"
+        type="text" 
+        class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input 
+        formControlName="phone"
+        type="text" 
+        class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="website">Website</label>
+      <input 
+        formControlName="website"
+        type="text" 
+        class="form-control">
+    </div>
+    <fieldset formGroupName="address">
+      <legend>Address</legend>
+      <div class="form-group">
+        <label for="street">Street</label>
+        <input 
+          formControlName="street"
+          type="text" 
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="suite">Suite</label>
+        <input 
+          formControlName="suite"
+          type="text" 
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <input 
+          formControlName="city"
+          type="text" 
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="zipcode">Zipcode</label>
+        <input 
+          formControlName="zipcode"
+          type="text" 
+          class="form-control">
+      </div>
+      <fieldset formGroupName="geo">
+        <legend>Geo</legend>
+        <div class="form-group">
+          <label for="lat">Lat</label>
+          <input 
+            formControlName="lat"
+            type="text" 
+            class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="lng">Lng</label>
+          <input 
+            formControlName="lng"
+            type="text" 
+            class="form-control">
+        </div>
+      </fieldset>
+    </fieldset>
+    <fieldset formGroupName="company">
+      <legend>Company</legend>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input 
+          formControlName="name"
+          type="text" 
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="catchPhrase">Catch Phrase</label>
+        <input 
+          formControlName="catchPhrase"
+          type="text" 
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="bs">BS</label>
+        <input 
+          formControlName="bs"
+          type="text" 
+          class="form-control">
+      </div>
+    </fieldset>
+    <fieldset formArrayName="hobbies">
+      <legend>Hobbies <span class="glyphicon glyphicon-plus" (click)="addHobby()" aria-hidden="true"></span></legend>
+      <div 
+        class="input-group" 
+        *ngFor="let hobbyControl of userForm.get('hobbies').controls; let i = index">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Hobby Name" 
+          [formControlName]="i">
+        <span 
+          class="input-group-addon glyphicon glyphicon-trash" 
+          (click)="deleteHobby(i)" 
+          aria-hidden="true">
+        </span>
+      </div>
+    </fieldset>
+    <div class="form-group">
+      <label>Select a Gender: </label>
+      <label for="gender" *ngFor="let g of genders">
+        <input type="radio" name="gender" [value]="g"> {{ g }} <br>
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="communicationMode">Select a mode of Communication</label>
+      <select name="communicationMode" class="form-control">
+        <option value=""></option>
+        <option *ngFor="let option of communicationOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+    <div class="checkbox">
+      <label for="agreement">
+        <input type="checkbox" name="agreement"> I agree to the Terms and Conditions!
+      </label>
+    </div>
+  </form>
+</div>
